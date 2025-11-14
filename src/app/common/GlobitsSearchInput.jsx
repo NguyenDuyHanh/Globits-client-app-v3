@@ -1,23 +1,29 @@
 import React from "react";
-import {
-  FormControl,
-} from "@material-ui/core";
+import { observer } from "mobx-react";
+import { FormControl } from "@material-ui/core";
+import { useStore } from "app/stores";
 import SearchIcon from "@material-ui/icons/Search";
 import { useTranslation } from "react-i18next";
 import "./SearchBox.scss";
 
-export default function GlobitsSearchInput(props) {
+export default observer(function GlobitsSearchInput(props) {
   const { t } = useTranslation();
 
-  const [keyword, setKeyword] = React.useState("");
+  const { countryStore } = useStore();
 
-  const { search } = props;
+  const {search, type} = props;
 
   const handleKeyDownEnterSearch = (event) => {
     if (event.key === "Enter") {
       var searchObject = {};
-      searchObject.keyword = keyword;
-      props.search(searchObject);
+      searchObject.keyword = countryStore.keyword;
+      search(searchObject);
+    }
+  };
+
+  const handleChange = (event) => {
+    if (type === "country") {
+      countryStore.setKeyword(event.target.value);
     }
   };
 
@@ -25,7 +31,7 @@ export default function GlobitsSearchInput(props) {
     <FormControl fullWidth>
       <div className="search-box">
         <input
-          onChange={(event) => setKeyword(event.target.value)}
+          onChange={handleChange}
           onKeyDown={handleKeyDownEnterSearch}
           placeholder={t("general.enter_search")}
         />
@@ -33,7 +39,7 @@ export default function GlobitsSearchInput(props) {
           className="btn btn-search"
           onClick={() => {
             var searchObject = {};
-            searchObject.keyword = keyword;
+            searchObject.keyword = countryStore.keyword;
             search(searchObject);
           }}
         >
@@ -48,4 +54,4 @@ export default function GlobitsSearchInput(props) {
       </div>
     </FormControl>
   );
-}
+});

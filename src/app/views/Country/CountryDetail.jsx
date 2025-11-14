@@ -1,35 +1,26 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { observer } from "mobx-react";
+import { useStore } from "app/stores";
 
-import { getCountry } from "./CountryService";
-import CountryForm from "./CountryForm";
+import CountryForm from "./component/CountryForm";
 
-const CountryDetail = () => {
-  const [country, setCountry] = useState({});
+const CountryDetail =  observer( () => {
   const { countryId } = useParams();
+  const { countryStore } = useStore();
+
+  console.log(countryStore.selectedCountry);
 
   useEffect(() => {
-    if (!countryId) {
-      console.error("No countryId provided in route parameters");
-      return;
-    }
-    const fetchCountry = async () => {
-      try {
-        const response = await getCountry(countryId);
-        setCountry(response.data);
-      } catch (error) {
-        console.error("Failed to fetch country details", error);
-      }
-    };
-    fetchCountry();
+    countryStore.getCountryById(countryId);
   }, []);
 
   return (
     <CountryForm
       action="viewDetail"
-      country={country}
+      country={countryStore.selectedCountry}
     />
   );
-};
+});
 
 export default CountryDetail;

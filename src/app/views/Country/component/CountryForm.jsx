@@ -3,7 +3,12 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { Box, Button, Paper, TextField, Typography } from "@material-ui/core";
 import { useTranslation } from "react-i18next";
 
-const CountryForm = ({ action, country, handleCreate, handleEdit }) => {
+const CountryForm = ({
+  action,
+  country,
+  handleCreateCountry,
+  handleEditCountry,
+}) => {
   const history = useHistory();
 
   const { t } = useTranslation();
@@ -21,11 +26,13 @@ const CountryForm = ({ action, country, handleCreate, handleEdit }) => {
           description: "",
         };
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values, { resetForm }) => {
     if (action === "edit") {
-      handleEdit(values);
-    } else if (action === "add") {
-      handleCreate(values);
+      await handleEditCountry(values);
+    }
+    if (action === "add") {
+      await handleCreateCountry(values);
+      resetForm();
     }
   };
 
@@ -57,29 +64,34 @@ const CountryForm = ({ action, country, handleCreate, handleEdit }) => {
             ? `${t("country.title_add")}`
             : action === "viewDetail"
             ? `${t("country.title_view")}`
-            : `${t("country.title_edit")}`
-          }
+            : `${t("country.title_edit")}`}
         </Typography>
 
         <Formik
           initialValues={initialValues}
           onSubmit={handleSubmit}
           enableReinitialize={true}
-          validate={values => {
+          validate={(values) => {
             const errors = {};
             if (!values.name) {
-              errors.name = "Name is required"
+              errors.name = "Name is required";
             }
             if (!values.code) {
-              errors.code = "Code is required"
+              errors.code = "Code is required";
             }
             if (!values.description) {
-              errors.description = "Description is required"
+              errors.description = "Description is required";
             }
             return errors;
           }}
         >
-          {({ values, handleChange, handleSubmit, errors, touched }) => (
+          {({
+            values,
+            handleChange,
+            handleSubmit,
+            errors,
+            touched,
+          }) => (
             <form
               style={{ display: "flex", flexDirection: "column", gap: 8 }}
               onSubmit={handleSubmit}
@@ -94,7 +106,9 @@ const CountryForm = ({ action, country, handleCreate, handleEdit }) => {
                 InputProps={{ readOnly: action === "viewDetail" }}
               />
 
-              {errors.name && touched.name && <div style={{ color: "red" }}>{errors.name}</div>}
+              {errors.name && touched.name && (
+                <div style={{ color: "red" }}>{errors.name}</div>
+              )}
 
               <TextField
                 id="standard-basic"
@@ -106,7 +120,9 @@ const CountryForm = ({ action, country, handleCreate, handleEdit }) => {
                 InputProps={{ readOnly: action === "viewDetail" }}
               />
 
-              {errors.code && touched.code && <div style={{ color: "red" }}>{errors.code}</div>}
+              {errors.code && touched.code && (
+                <div style={{ color: "red" }}>{errors.code}</div>
+              )}
 
               <TextField
                 id="standard-basic"
@@ -118,8 +134,10 @@ const CountryForm = ({ action, country, handleCreate, handleEdit }) => {
                 InputProps={{ readOnly: action === "viewDetail" }}
               />
 
-              {errors.description && touched.description && <div style={{ color: "red" }}>{errors.description}</div>}
-              
+              {errors.description && touched.description && (
+                <div style={{ color: "red" }}>{errors.description}</div>
+              )}
+
               <Box
                 style={{
                   display: "flex",

@@ -31,7 +31,7 @@ const Routes = [
   },
 
   {
-    path: ConstantList.ROOT_PATH + "category/country/:countryId",
+    path: ConstantList.ROOT_PATH + "category/country/viewDetails/:countryId",
     exact: true,
     component: CountryDetail,
   },

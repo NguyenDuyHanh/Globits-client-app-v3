@@ -2,7 +2,7 @@ import { useStore } from "app/stores"
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 
-import CountryForm from "./component/CountryForm";
+import CountryForm from "./components/CountryForm";
 
 const CountryAdd = () => {
   const { countryStore } = useStore();

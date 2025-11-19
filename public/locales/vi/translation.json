@@ -91,7 +91,7 @@
     "placehoder_description": "Nhập mô tả của tôn giáo"
   },
   "country": {
-    "title": "Danh sách quốc gia",
+    "title": "Danh mục quốc gia",
     "title_add": "Thêm mới quốc gia",
     "title_edit": "Chỉnh sửa quốc gia",
     "title_view": "Chi tiết quốc gia",
@@ -102,6 +102,25 @@
     "placehoder_code": "Nhập mã của quốc gia",
     "placehoder_name": "Nhập tên của quốc gia",
     "placehoder_description": "Nhập mô tả của quốc gia"
+  },
+  "department": {
+    "title": "Danh mục phòng ban",
+    "title_add": "Thêm mới phòng ban",
+    "title_edit":"Chỉnh sửa phòng ban",
+    "title_view":"Chi tiết phòng ban",
+    "name": "Tên phòng ban",
+    "code": "Mã ",
+    "saveUpdate": "Thêm mới",
+    "search": "Nhập từ khóa",
+    "displayOrder": "Mã hiển thị",
+    "foundedDate": "Ngày thành lập",
+    "foundedNumber": "Quyết định số",
+    "function": "Chức năng",
+    "description": "Mô tả",
+    "industryBlock": "Khối ngành",
+    "parent": "Đơn vị trực thuộc",
+    "warning_parent": "Không thể chọn phòng ban này làm phòng ban cha",
+    "noti_use": "Phòng ban đã được sử dụng không thể xóa"
   },
   "staff": {
     "title": "Thông tin nhân sự",
@@ -253,22 +272,6 @@
     "endTime": "Thời gian kết thúc",
     "salaryStartDate": "Ngày hưởng bậc lương hiện tại",
     "status": "Trạng Thái Nhân Viên"
-  },
-  "department": {
-    "title": "Danh mục phòng ban",
-    "name": "Tên phòng ban",
-    "code": "Mã ",
-    "saveUpdate": "Thêm mới",
-    "search": "Nhập từ khóa",
-    "displayOrder": "Mã hiển thị",
-    "foundedDate": "Ngày",
-    "foundedNumber": "Quyết định số",
-    "function": "Chức năng",
-    "description": "Mô tả",
-    "industryBlock": "Khối ngành",
-    "parent": "Đơn vị trực thuộc",
-    "warning_parent": "Không thể chọn phòng ban này làm phòng ban cha",
-    "noti_use": "Phòng ban đã được sử dụng không thể xóa"
   },
   "civilServantCategory": {
     "title": "Mã ngạch công chức",

@@ -15,6 +15,13 @@ export const navigations = [
       {
         name: "navigation.country",
         path: ConstantList.ROOT_PATH + "category/country",
+        icon: "remove",                                                                                                                                                                                                                                                                                                                                                                                                                       
+        isVisible: true,
+      },
+
+      {
+        name: "navigation.department",
+        path: ConstantList.ROOT_PATH + "category/department",
         icon: "remove",
         isVisible: true,
       },

@@ -8,7 +8,7 @@ import { observer } from "mobx-react";
 import { useStore } from "app/stores";
 import { toast } from "react-toastify";
 
-import CountryForm from "./component/CountryForm";
+import CountryForm from "./components/CountryForm";
 
 const CountryEdit = observer(() => {
   const history = useHistory();

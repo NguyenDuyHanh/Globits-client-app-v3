@@ -9,14 +9,18 @@ import "./SearchBox.scss";
 export default observer(function GlobitsSearchInput(props) {
   const { t } = useTranslation();
 
-  const { countryStore } = useStore();
+  const { countryStore, departmentStore } = useStore();
 
   const {search, type} = props;
 
   const handleKeyDownEnterSearch = (event) => {
     if (event.key === "Enter") {
       var searchObject = {};
-      searchObject.keyword = countryStore.keyword;
+      if (type === "department") {
+        searchObject.keyword = departmentStore.keyword;
+      } else if (type === "country") {
+        searchObject.keyword = countryStore.keyword;
+      }
       search(searchObject);
     }
   };
@@ -24,6 +28,9 @@ export default observer(function GlobitsSearchInput(props) {
   const handleChange = (event) => {
     if (type === "country") {
       countryStore.setKeyword(event.target.value);
+    }
+    else if (type === "department") {
+      departmentStore.setKeyword(event.target.value);
     }
   };
 

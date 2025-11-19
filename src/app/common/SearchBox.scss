@@ -1,5 +1,7 @@
 .search-box {
-  float: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 50px;
   position: relative;
   input {
@@ -28,7 +30,7 @@
   .btn-search {
     border-radius: 50%;
     right: 3px;
-    top: 3px;
+    top: 9px;
     transition: all 0.3s ease-in-out;
     text-align: center;
     background-image: linear-gradient(

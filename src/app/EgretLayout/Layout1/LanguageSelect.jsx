@@ -21,15 +21,15 @@ const styles = (theme) => ({
     marginTop: theme.spacing.unit * 2,
   },
   languageLabel: {
-    color: "#fff",
+    color: "text-gray",
   },
   languageSelect: {
-    color: "#fff",
+    color: "text-gray",
     "&::before": {
-      borderBottom: "1px solid #fff",
+      borderBottom: "1px solid text-gray",
     },
     "& > svg": {
-      color: "#fff",
+      color: "text-gray",
     },
   },
 });
@@ -54,9 +54,9 @@ class LanguageSelect extends React.Component {
     //   i18n.changeLanguage(lng);
     // };
     return (
-      <form className={classes.root} autoComplete="off">
+      <form className={classes.root} autoComplete="off" variant="filled">
         <FormControl className={classes.formControl} error={hasError}>
-          <InputLabel className={classes.languageLabel} htmlFor="name">
+          <InputLabel className={classes.languageLabel} htmlFor="name" shrink={true}>
             {t("general.language")}
           </InputLabel>
           <Select

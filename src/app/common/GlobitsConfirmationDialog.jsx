@@ -10,6 +10,12 @@ export default function GlobitsConfirmationDialog(props) {
       fullWidth={true}
       open={open}
       onClose={onConfirmDialogClose}
+      BackdropProps={{
+        timeout: 500,
+        style: {
+          backgroundColor: "rgba(0, 0, 0, 0.25)",
+        },
+      }}
     >
       <div className="pt-24 px-20 pb-8">
         <h4 className="capitalize">{title}</h4>

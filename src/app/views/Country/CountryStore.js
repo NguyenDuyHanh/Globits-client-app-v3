@@ -1,4 +1,6 @@
-import { makeAutoObservable } from "mobx";
+import { makeObservable, observable, action } from "mobx";
+
+import BasePaginationStore from "app/basePaginationStore";
 
 import {
   pagingCountries,
@@ -8,18 +10,26 @@ import {
   deleteCountry,
 } from "./CountryService";
 
-export default class CountryStore {
+export default class CountryStore extends BasePaginationStore {
   countries = [];
-  page = 1;
-  pageSize = 10;
-  toltalPages = 0;
-  toltalElements = 0;
-  pageSizeOption = [10, 15, 20, 25, 30];
-  keyword = "";
   selectedCountry = {};
+  keyword = "";
 
   constructor() {
-    makeAutoObservable(this);
+    super();
+    makeObservable(this, {
+      countries: observable,
+      selectedCountry: observable,
+      keyword: observable,
+      setCountries: action,
+      setSelectedCountry: action,
+      reset: action,
+      loadCountries: action,
+      getCountryById: action,
+      createCountry: action,
+      editCountry: action,
+      deleteCountry: action,
+    });
   }
 
   setSelectedCountry = (country) => {
@@ -30,41 +40,10 @@ export default class CountryStore {
     this.countries = countries;
   };
 
-  setToltalPages = (toltalPages) => {
-    this.toltalPages = toltalPages;
-  };
-
-  setToltalElements = (toltalElements) => {
-    this.toltalElements = toltalElements;
-  };
-
-  setPageSize = (pageSize) => {
-    this.pageSize = pageSize;
-  };
-
-  setPage = (page) => {
-    this.page = page;
-  };
-
-  setKeyword = (keyword) => {
-    this.keyword = keyword;
-  };
-
-  handleChangePage = (event, newPage) => {
-    this.setPage(newPage);
-  };
-
-  setRowsPerPage = (e) => {
-    this.setPageSize(e.target.value);
+  reset = () => {
+    this.setKeyword("");
     this.setPage(1);
-  };
-
-  handleSearch = (searchObject) => {
-    console.log(searchObject);
-    this.setKeyword(searchObject.keyword);
-    this.setPage(1);
-    this.loadCountries();
-  };
+  }
 
   loadCountries = async () => {
     try {
@@ -77,8 +56,8 @@ export default class CountryStore {
       };
       const response = await pagingCountries(searchObject);
       this.setCountries(response.data.content);
-      this.setToltalPages(response.data.totalPages);
-      this.setToltalElements(response.data.totalElements);
+      this.setTotalPages(response.data.totalPages);
+      this.setTotalElements(response.data.totalElements);
     } catch (error) {
       console.error("Failed to load countries", error);
     }
@@ -118,5 +97,11 @@ export default class CountryStore {
     } catch (error) {
       console.error("Failed to delete country", error);
     }
+  };
+
+  handleSearch = (searchObject) => {
+    this.setKeyword(searchObject.keyword);
+    this.setPage(1);
+    this.loadCountries();
   };
 }

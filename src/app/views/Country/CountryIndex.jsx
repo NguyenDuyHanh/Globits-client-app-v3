@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { useStore } from "app/stores";
 import { observer } from "mobx-react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useTranslation } from "react-i18next";
 import {
+  Box,
   Table,
   TableBody,
   TableCell,
@@ -12,23 +12,29 @@ import {
   TableHead,
   TableRow,
 } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import AddIcon from "@material-ui/icons/Add";
 import { toast } from "react-toastify";
 
-import ConfirmModal from "./component/ConfirmModal";
+import { useStore } from "app/stores";
+import ConfirmModal from "./components/ConfirmModal";
 import GlobitsPagination from "app/common/GlobitsPagination";
 import GlobitsSearchInput from "app/common/GlobitsSearchInput";
+import BtnWithIconAndLabel from "app/common/button/BtnWithIconAndLabel";
 const useStyles = makeStyles(() => ({
   table: {
     minWidth: 650,
   },
+  tableHead: {
+    backgroundColor: "#04c0ca",
+  },
   headCell: {
     fontWeight: "bold",
     fontSize: "16px",
+    color: "#fff",
   },
   viewDetailBtn: {
     color: "blue",
@@ -67,6 +73,7 @@ export default observer(function CountryIndex() {
   const { countries } = countryStore;
 
   const [openModal, setOpenModal] = useState(false);
+
   const [countryId, setCountryId] = useState(null);
 
   const history = useHistory();
@@ -114,13 +121,14 @@ export default observer(function CountryIndex() {
     <div className="px-40">
       <h2 className="my-40 text-center">{t("country.title")}</h2>
       <div className="flex flex-space-between flex-middle mb-20">
-        <button
-          variant="contained"
-          className="btn btn-primary"
-          onClick={handleOpenAddForm}
-        >
-          {t("general.button.add")}
-        </button>
+        <BtnWithIconAndLabel
+            labelKey="general.button.add"
+            positionIcon="start"
+            icon={<AddIcon />}
+            variant="contained"
+            classname="bg-primary"
+            onClick={handleOpenAddForm}
+        />
 
         <GlobitsSearchInput 
           type="country"
@@ -128,11 +136,11 @@ export default observer(function CountryIndex() {
         />
       </div>
 
-      <TableContainer component={Paper} className="px-20 mb-20">
+      <TableContainer component={Paper} className="mb-20">
         <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell className={classes.headCell}>Id</TableCell>
+          <TableHead className={classes.tableHead}>
+            <TableRow className="">
+              <TableCell className={`${classes.headCell} pl-20`}>Id</TableCell>
               <TableCell align="right" className={classes.headCell}>
                 {t("general.table.name")}
               </TableCell>
@@ -142,7 +150,7 @@ export default observer(function CountryIndex() {
               <TableCell align="right" className={classes.headCell}>
                 {t("general.table.description")}
               </TableCell>
-              <TableCell align="right" className={classes.headCell}>
+              <TableCell align="right" className={`${classes.headCell} pr-20`}>
                 {t("general.table.action")}
               </TableCell>
             </TableRow>
@@ -150,13 +158,13 @@ export default observer(function CountryIndex() {
           <TableBody>
             {countries.map((country, index) => (
               <TableRow key={index}>
-                <TableCell style={{ whiteSpace: "nowrap" }}>
+                <TableCell style={{ whiteSpace: "nowrap", paddingLeft: 20}}>
                   {country.id}
                 </TableCell>
                 <TableCell align="right">{country.name}</TableCell>
                 <TableCell align="right">{country.code}</TableCell>
                 <TableCell align="right">{country.description}</TableCell>
-                <TableCell align="right">
+                <TableCell align="right" style={{ paddingRight: 16 }}>
                   <VisibilityIcon
                     fontSize="small"
                     className={classes.viewDetailBtn}
@@ -185,8 +193,8 @@ export default observer(function CountryIndex() {
       </TableContainer>
 
       <GlobitsPagination
-        totalPages={countryStore.toltalPages}
-        totalElements={countryStore.toltalElements}
+        totalPages={countryStore.totalPages}
+        totalElements={countryStore.totalElements}
         page={countryStore.page}
         pageSize={countryStore.pageSize}
         pageSizeOption={countryStore.pageSizeOption}

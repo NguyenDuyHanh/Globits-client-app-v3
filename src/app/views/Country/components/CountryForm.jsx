@@ -59,7 +59,7 @@ const CountryForm = ({
           borderRadius: 12,
         }}
       >
-        <Typography variant="h5" align="center" gutterBottom>
+        <Typography className="mb-24" variant="h5" align="center" gutterBottom>
           {action === "add"
             ? `${t("country.title_add")}`
             : action === "viewDetail"
@@ -93,11 +93,13 @@ const CountryForm = ({
             touched,
           }) => (
             <form
-              style={{ display: "flex", flexDirection: "column", gap: 8 }}
+              style={{ display: "flex", flexDirection: "column", gap: 16 }}
               onSubmit={handleSubmit}
             >
               <TextField
-                id="standard-basic"
+                id="outlined-basic"
+                variant="outlined"
+                size="small"
                 label={t("country.name")}
                 name="name"
                 value={values.name}
@@ -111,7 +113,9 @@ const CountryForm = ({
               )}
 
               <TextField
-                id="standard-basic"
+                id="outlined-basic"
+                variant="outlined"
+                size="small"
                 label={t("country.code")}
                 name="code"
                 value={values.code}
@@ -125,7 +129,9 @@ const CountryForm = ({
               )}
 
               <TextField
-                id="standard-basic"
+                id="outlined-basic"
+                variant="outlined"
+                size="small"
                 label={t("country.description")}
                 name="description"
                 value={values.description}
@@ -142,7 +148,7 @@ const CountryForm = ({
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
-                  marginTop: 16,
+                  marginTop: 8,
                 }}
               >
                 <Button onClick={handleBack} variant="outlined" color="primary">

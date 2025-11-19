@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { observer } from "mobx-react";
 import { useStore } from "app/stores";
 
-import CountryForm from "./component/CountryForm";
+import CountryForm from "./components/CountryForm";
 
 const CountryDetail =  observer( () => {
   const { countryId } = useParams();

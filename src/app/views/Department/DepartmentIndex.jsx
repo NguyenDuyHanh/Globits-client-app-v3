@@ -15,7 +15,6 @@ import GlobitsSearchInput from "app/common/GlobitsSearchInput";
 import BtnWithIconAndLabel from "app/common/button/BtnWithIconAndLabel";
 import GlobitsPagination from "app/common/GlobitsPagination";
 import GlobitsConfirmationDialog from "app/common/GlobitsConfirmationDialog";
-import { de } from "date-fns/locale";
 
 const DepartmentIndex = observer(() => {
   const [openConfirmDialog, setOpenConfirmDialog] = useState(false);

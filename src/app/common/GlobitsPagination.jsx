@@ -18,6 +18,15 @@ const useStyles = makeStyles((theme) => ({
       borderColor: "#1f5f94",
     },
   },
+  pageSelector: {
+     "& .MuiPaginationItem-page.Mui-selected": {
+      backgroundColor: "#04c0ca",
+      color: "#fff",
+    },
+    "& .MuiPaginationItem-page.Mui-selected:hover": {
+      backgroundColor: "#039a9f",
+    },
+  },
   rowPerPageSelector: {
     display: "flex",
     "& > p": {
@@ -108,7 +117,7 @@ export default function GlobitsPagination(props) {
             count={totalPages}
             shape="rounded"
             page={page}
-            color="primary"
+            className={classes.pageSelector}
             onChange={handleChangePage}
             boundaryCount={1}
             siblingCount={1}

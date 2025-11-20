@@ -1,5 +1,5 @@
 import React from "react";
-import { Dialog, Button, DialogActions } from "@material-ui/core";
+import { Dialog, DialogActions } from "@material-ui/core";
 
 export default function GlobitsConfirmationDialog(props) {
   const { open, onConfirmDialogClose, text, title, agree, cancel, onYesClick } =
@@ -22,20 +22,20 @@ export default function GlobitsConfirmationDialog(props) {
         <p>{text}</p>
         <DialogActions>
           <div className="flex flex-space-between flex-middle">
-            <Button
+            <button
               variant="contained"
-              className="mr-12 btn btn-secondary"
+              className="mr-12 btn btn-warning"
               onClick={onConfirmDialogClose}
             >
               {cancel}
-            </Button>
-            <Button
+            </button>
+            <button
               className="btn btn-primary"
               variant="contained"
               onClick={onYesClick}
             >
               {agree}
-            </Button>
+            </button>
           </div>
         </DialogActions>
       </div>

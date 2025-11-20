@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useStore } from "app/stores";
 import {
   Box,
-  Button,
   Paper,
   TextField,
   Typography,
@@ -272,13 +271,13 @@ const DepartmentForm = ({
                   marginTop: 24,
                 }}
               >
-                <Button onClick={handleBack} variant="outlined" color="primary">
+                <button onClick={handleBack} className="btn btn-primary-outline">
                   {t("general.button.back")}
-                </Button>
+                </button>
                 {action !== "viewDetail" && (
-                  <Button type="submit" variant="contained" color="primary">
+                  <button type="submit" className="btn btn-primary">
                     {t("general.button.save")}
-                  </Button>
+                  </button>
                 )}
               </Box>
             </form>
